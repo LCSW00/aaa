@@ -3,91 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>数字格式化工具</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
+      * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
       }
       .container {
-        max-width: 800px;
         margin: 20px auto;
+        height: 500px;
         background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px;
         padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
+        display: grid;
+        grid-template-columns: 400px 400px;
+        grid-template-rows: 40px auto auto;
+        grid-gap: 20px;
+      }
+      .a {
+        grid-column: 1 /3;
       }
       h1 {
         text-align: center;
         color: #333;
       }
-      p {
-        margin-bottom: 10px;
-        color: #666;
-      }
-      textarea {
-        width: calc(100% - 40px);
-        height: 200px;
-        margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        resize: none;
-        font-family: monospace;
-      }
       button {
         width: 100%;
         padding: 10px;
-        background-color: #4caf50;
-        color: #fff;
         border: none;
-        border-radius: 5px;
+        background-color: blue;
+        border-radius: 10px;
+        font-weight: 600;
+        color: #ccc;
         cursor: pointer;
-        transition: background-color 0.3s;
       }
-      button:hover {
-        background-color: #45a049;
-      }
+      textarea,
       pre {
-        background-color: #f7f7f7;
-        padding: 10px;
-        border-radius: 5px;
-        overflow-x: auto;
-        font-family: monospace;
-      }
-      .copy-button {
-        display: block;
         width: 100%;
+        height: 340px;
         padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        text-align: center;
-        margin-top: 10px;
-      }
-      .copy-button:hover {
-        background-color: #0056b3;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        resize: none;
+        font-family: monospace;
+        overflow: auto;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>数字格式化工具</h1>
-      <p>请将您的长串数字粘贴在下方输入框中：</p>
-      <textarea id="input" placeholder="请在此处粘贴您的数字"></textarea>
-      <button onclick="formatData()">格式化数据</button>
-      <pre id="output"></pre>
-      <button class="copy-button" onclick="copyToClipboard()">
-        复制到剪贴板
-      </button>
+      <div class="a">
+        <h1>数字格式化工具</h1>
+      </div>
+      <div class="b">
+        <button onclick="formatData()">格式化数据</button>
+      </div>
+      <div class="c">
+        <button onclick="copyToClipboard()">复制到剪贴板</button>
+      </div>
+      <div class="d">
+        <textarea
+          id="input"
+          placeholder="请在此处粘贴您的数字"
+          oninput="limitPerLine(this, 14)"
+        ></textarea>
+      </div>
+      <div class="e">
+        <pre id="output"></pre>
+      </div>
     </div>
 
     <script>
+      function limitPerLine(element, limit) {
+        let lines = element.value.split("\n");
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].length > limit) {
+            lines[i] = lines[i].substring(0, limit);
+          }
+        }
+        element.value = lines.join("\n");
+      }
+
       function formatData() {
         const inputData = document.getElementById("input").value;
         const cleanedInput = inputData.replace(/\s/g, "");
