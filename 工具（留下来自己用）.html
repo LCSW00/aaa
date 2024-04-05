@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数字格式化工具</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      p {
+        margin-bottom: 10px;
+        color: #666;
+      }
+      textarea {
+        width: calc(100% - 40px);
+        height: 200px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+        font-family: monospace;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      pre {
+        background-color: #f7f7f7;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-family: monospace;
+      }
+      .copy-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .copy-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>数字格式化工具</h1>
+      <p>请将您的长串数字粘贴在下方输入框中：</p>
+      <textarea id="input" placeholder="请在此处粘贴您的数字"></textarea>
+      <button onclick="formatData()">格式化数据</button>
+      <pre id="output"></pre>
+      <button class="copy-button" onclick="copyToClipboard()">
+        复制到剪贴板
+      </button>
+    </div>
+
+    <script>
+      function formatData() {
+        const inputData = document.getElementById("input").value;
+        const cleanedInput = inputData.replace(/\s/g, "");
+
+        const pairs = cleanedInput.match(/.{1,2}/g);
+
+        const chunks = [];
+        for (let i = 0; i < pairs.length; i += 7) {
+          chunks.push(pairs.slice(i, i + 7));
+        }
+
+        const result = {};
+        for (let i = 0; i < chunks.length; i++) {
+          result[i + 1] = chunks[i];
+        }
+
+        document.getElementById("output").innerText =
+          "var adata = " + JSON.stringify(result, null, 2);
+      }
+
+      function copyToClipboard() {
+        const outputText = document.getElementById("output").innerText;
+        const textarea = document.createElement("textarea");
+        textarea.value = outputText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert("已复制到剪贴板！");
+      }
+    </script>
+  </body>
+</html>
