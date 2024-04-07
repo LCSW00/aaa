@@ -9,8 +9,9 @@
     />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <!-- 在这里更改顶部的标题 -->
+    <title>第2024037期内部数据</title>
     <style>
-      /* Your CSS styles */
       * {
         padding: 0;
         margin: 0;
@@ -20,13 +21,13 @@
       body {
         width: 100%;
         background: #f2f2f2;
+        max-width: 400px;
       }
       ::-webkit-scrollbar {
         display: none;
       }
       .top {
         padding: 20px;
-        background-color: #fcc5c5;
       }
       .title {
         text-align: center;
@@ -34,51 +35,56 @@
         font-size: 20px;
       }
       .time {
-        text-align: center;
         font-size: 14px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
       }
       .content {
         text-align: center;
         font-size: 14px;
-        color: red;
       }
       .bottom {
         width: 100%;
         padding: 10px;
         display: grid;
-        grid-template-columns: repeat(7, 1fr) auto repeat(7, 1fr) auto;
+        grid-template-columns: repeat(7, 1fr) 1fr repeat(7, 1fr) 0;
         gap: 8px 3px;
       }
       .bottom > div {
-        background-color: rgb(207, 78, 78);
+        background-color: rgb(235, 151, 151);
         height: 20px;
+        width: 20px;
         text-align: center;
         line-height: 20px;
         font-size: 12px;
-        border-radius: 5px;
+        border-radius: 50%;
       }
       .bottom > div:nth-child(8n - 1) {
-        background-color: rgb(91, 116, 237);
+        background-color: rgb(49, 196, 237);
       }
       .bottom > div:nth-child(8n) {
         border: none;
         background-color: #f2f2f2;
       }
     </style>
-    <title>第2024038期内部数据</title>
   </head>
   <body>
     <div class="top">
-      <div class="title">第2024038期内部数据</div>
-      <div class="time">开奖时间:2024-4-7 21:15:00</div>
+      <!-- 在这里更改序数 -->
+      <div class="title">第 2024037 期内部数据</div>
+      <!-- 在这里更改开奖时间 -->
+      <div class="time">
+        <span>开奖时间:</span>
+        <span>2024-4-4</span>
+        <span>21:15:00</span>
+      </div>
       <div class="content">内部数据，泄漏必究</div>
     </div>
     <div class="bottom"></div>
     <script src="./data.js"></script>
     <script>
       var bottomDiv = document.querySelector(".bottom");
-
-      // Loop through each set of numbers in adata
       for (var key in adata) {
         if (adata.hasOwnProperty(key)) {
           var numbers = adata[key];
